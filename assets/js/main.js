@@ -8,7 +8,16 @@ function mountain() {
     alert('산이 클릭됨');
 }
 
-// 3. "산행추가" 버튼 이벤트
+// 3. "산행추가" 버튼 (모달창 열기)
 function addStory() {
-    alert('빠른 시일 내 구현하겠습니다^^')
+    const modal = document.querySelector('.modal');
+    modal.style.display = "block";
 }
+
+// 4. 모달 닫기 버튼
+function closeModal(){
+    const modal = document.querySelector('.modal');
+    modal.style.display = "none";
+}
+
+// 5. 글쓰기 완료 버튼 (db연결-ajax)
