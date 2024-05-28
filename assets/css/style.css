@@ -1,5 +1,6 @@
 .main {}
 .main .content {}
+/* main - mapWrap */
 .main .content.mapWrap {}
 .main .content.mapWrap h3 {
   text-align: center;
@@ -9,7 +10,25 @@
 }
 .map {
     width: 95%;
-    height: 500px;
+    height: 700px;
     border: 1px solid #333;
     margin: 0 auto;
+  }
+
+  /* main - story */
+  .storyBtn {
+    text-align: right;
+    margin-right: 15px;
+  }
+  .addBtn {
+    width: 200px;
+    transition: 0.3s;
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+  .addBtn:hover {
+    background-color: #333;
+    color: #fff;
   }

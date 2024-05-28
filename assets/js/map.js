@@ -71,7 +71,7 @@ function mapInit() {
   map.addLayer(featureLayer);
 }
 
-// 함수 출력
+// 최종 함수출력
 $(document).ready(function(){
   mapInit();
 })
