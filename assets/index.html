@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>633km 국토종주 이야기 - OpenLayers</title>
+    <title>100대 내가 정복한 산 - OpenLayers</title>
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -12,12 +12,36 @@
     <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script>
 
     <!-- custom css -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+    <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <div id="map" class="map"></div>
+    <div id="wrap">
+        <!-- header -->
+        <header id="header">
+            <h1>
+                <a href="./index.html">GIS개발연습하기</a>
+                <span>100대명산 내가 정복한 산 (13/100)</span>
+            </h1>
+            <div class="search" onclick="search();"><i class="xi-search"></i></div>
+        </header>
+
+        <!-- main -->
+        <section id="container" class="main">
+            <div class="content mapWrap">
+                <h3>OPENLAYERS</h3>
+                <div id="map" class="map"></div>
+            </div>
+            <div class="content story"></div>
+        </section>
+
+        <!-- footer -->
+        <footer id="footer"></footer>
+    </div>
 
     <!-- script part -->
+    <script src="./js/map.js"></script>
     <script src="./js/main.js"></script>
 </body>
 </html>

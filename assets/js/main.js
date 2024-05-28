@@ -1,22 +1,4 @@
-function mapInit() {
-  let map = new ol.Map({
-      target: 'map',
-      layers: [
-      new ol.layer.Tile({
-          source: new ol.source.OSM({
-          url: 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png'
-          })
-      })
-      ],
-      view: new ol.View({
-      // center: ol.proj.fromLonLat([128.4, 35.7]),
-      center: ol.proj.fromLonLat([128.4, 35.7]),
-      zoom: 8
-      })
-  });
+// search 기능
+function search() {
+    alert('아직 미구현 기능입니다 ㅠ_ㅠ');
 }
-
-// 함수 출력
-$(document).ready(function(){
-  mapInit();
-})

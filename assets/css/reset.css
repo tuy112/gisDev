@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	overflow-x: hidden;
+	position: relative;
+	cursor: default;
+}
+a, button, .btn {   
+    text-decoration: none;
+	cursor: pointer;
+	color: #111;
+	background: none;
+}
+
+ol, ul , li {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.hide {
+	position: absolute;
+	left: 0; top: 0;
+	width: 0; height: 0;
+	text-indent: -9999em;
+	overflow: hidden;
+	visibility: hidden;
+	line-height: 0;
+}
+hr {
+    border:1px solid #999;
+    width: 90%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+/* common */
+#wrap {
+    width: 100%;
+    padding: 2px;
+  }
+  
+/* header */
+#header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+#header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: 7px;
+    margin-left: 10px;
+	transition: 0.3s;
+}
+#header h1:hover {
+	transform: scaleY(1.1);
+}
+#header h1 span {
+    font-size: 12px;
+    margin-left: 5px;
+    font-family: 'Montserrat', sans-serif;
+}
+#header .search {
+    cursor: pointer;
+    border: 1px solid #333;
+    border-radius: 3px;
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    margin-top: 10px;
+    margin-right: 10px;
+    transition: 0.3s;
+}
+#header .search:hover {
+    background: #333;
+    color: #fff;
+}
+
+/* footer */
+#footer {
+	text-align: right;
+	margin-right: 10px;
+	margin-bottom: 5px;
+}
+#footer p {
+	font-size: 13px;
+	font-weight: 600;
+}
+
+/* scroll bar */
+::-webkit-scrollbar {
+    width: 13px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+    background-color: grey;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
