@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/modal.css">
 </head>
 <body>
     <div id="wrap">
@@ -40,7 +41,19 @@
 
         <!-- footer -->
         <footer id="footer"></footer>
-    </div>
+
+        <!-- modal popup -->
+        <div class="modal">
+            <div class="modalPopup">
+                <h3>오늘 내가 다녀온 산은..?</h3>
+                <input type="text" class="writeArea" />
+                <div class="btnWrap">
+                    <input type="button" class="btn closeBtn" value="글쓰기완료"/>
+                    <input type="button" class="btn closeBtn" value="닫기"/>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end #wrap-->
 
     <!-- script part -->
     <script src="./js/map.js"></script>
