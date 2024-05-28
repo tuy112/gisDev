@@ -20,17 +20,17 @@ function mapInit() {
     image: new ol.style.Circle({
       radius: 5,
       fill: new ol.style.Fill({
-        color: 'red'
+        color: '#ff0000'
       })
     }),
     text: new ol.style.Text({
       text: '설악산',
       font: '12px Calibri,sans-serif',
       fill: new ol.style.Fill({
-        color: 'black'
+        color: '#555'
       }),
       stroke: new ol.style.Stroke({
-        color: 'white',
+        color: '#fff',
         width: 2
       }),
       offsetY: -15 // 위치 조정
@@ -58,6 +58,16 @@ function mapInit() {
         shiftDragZoom: true //shift+드래그 줌
       }),
   });
+  // 산 클릭 이벤트
+  map.on('click', function(event) {
+    map.forEachFeatureAtPixel(event.pixel, function(feature) {
+      if (feature === pointFeature) {
+        mountain();
+      }
+    });
+  });
+
+  // 점 출력
   map.addLayer(featureLayer);
 }
 

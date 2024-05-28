@@ -7,7 +7,6 @@ const path = require('path');
 
 app.use(cors());
 
-
 // HTML, CSS
 app.use(express.static(path.join(__dirname, 'assets')));
 app.get('/', (req, res) => {
