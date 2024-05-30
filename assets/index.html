@@ -45,10 +45,18 @@
         <!-- modal popup -->
         <div class="modal">
             <div class="modalPopup">
-                <h3>오늘 내가 다녀온 산은..?</h3>
-                <input type="text" class="writeArea" />
+                <h3>오늘 내가 다녀온 산 추가하기</h3>
+                <form className="sendForm" id="sendForm">
+                    <label for="mountainNm">산 </label>
+                    <input type="text" class="mName" placeholder="산" /><br/>
+                    <label for="mountainDay">일시</label>
+                    <input type="text" class="mDay" placeholder="일시" /><br/>
+
+                    <label for="mountainStory">내용</label>
+                    <input type="text" class="writeArea" placeholder="산타면서 있었던 일 메모!" />
+                </form>
                 <div class="btnWrap">
-                    <input type="button" class="btn sendBtn" value="글쓰기완료"/>
+                    <input type="button" class="btn sendBtn" value="글쓰기완료" onclick="sendDb();"/>
                     <input type="button" class="btn closeBtn" value="닫기" onclick="closeModal();"/>
                 </div>
             </div>

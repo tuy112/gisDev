@@ -7,6 +7,9 @@ const path = require('path');
 
 app.use(cors());
 
+// 산행추가 GET
+
+
 // HTML, CSS
 app.use(express.static(path.join(__dirname, 'assets')));
 app.get('/', (req, res) => {
