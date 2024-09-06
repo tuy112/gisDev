@@ -1,0 +1,104 @@
+/* 전체 레이아웃 */
+#wrap {
+    width: 100%;
+    padding: 2px;
+}
+
+/* header */
+#header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+#header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: 7px;
+    margin-left: 10px;
+    transition: 0.3s;
+}
+
+#header h1:hover {
+    transform: scale(1.1);
+}
+
+#header h1 span {
+    font-size: 12px;
+    margin-left: 5px;
+    font-family: 'Montserrat', sans-serif;
+    color: #777;
+}
+
+#header .search {
+    cursor: pointer;
+    border: 1px solid #333;
+    border-radius: 3px;
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    margin-top: 10px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+}
+
+#header .search:hover {
+    background: #333;
+    color: #fff;
+}
+
+/* 메인 컨텐츠 */
+.main {
+    padding: 20px;
+}
+
+.main .content {
+    margin-bottom: 30px;
+}
+
+/* 지도 래퍼 */
+.main .content.mapWrap {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.main .content.mapWrap h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* 지도 스타일 */
+.map {
+    width: 95%;
+    height: 700px;
+    border: 1px solid #333;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 추가 버튼 스타일 */
+.storyBtn {
+    text-align: right;
+    margin-right: 15px;
+}
+
+.addBtn {
+    width: 200px;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: 600;
+    margin-top: 10px;
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    transition: all 0.3s;
+}
