@@ -1,9 +1,9 @@
 # OpenLayers를 이용한 100대명산 산행기록방
 [ 100좌를 향해..! ]
 
-- React.js
-- Next.js API Routes (Node.js)
-- PostgreSQL
+- Front : React.js
+- Back : Node.js (Express.js)
+- DB : PostgreSQL
 
 ---
 
