@@ -10,7 +10,9 @@
 #### 산행기록방 API
 
 GET /api/mountains
+
 POST /api/mountains
+
 GET /api/mountains/geocode
 
 ---
