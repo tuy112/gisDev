@@ -15,15 +15,11 @@
 
 #header h1 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 600;
     margin-top: 7px;
     margin-left: 10px;
     transition: 0.3s;
-}
-
-#header h1:hover {
-    transform: scale(1.1);
 }
 
 #header h1 span {
