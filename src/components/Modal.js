@@ -1,109 +1,205 @@
-import React, { useState } from 'react';
+
+import React, { useEffect, useState } from 'react';
+
 import '../styles/Modal.css';
 
+const API_URL = '';
+
 const Modal = ({ isOpen, onClose, onMountainAdded }) => {
-  const [name, setName] = useState('');
-  const [latitude, setLatitude] = useState('');
-  const [longitude, setLongitude] = useState('');
+      const [name, setName] = useState('');
+      const [latitude, setLatitude] = useState('');
+      const [longitude, setLongitude] = useState('');
 
-  // 산 이름을 입력하면 Nominatim API로 좌표 조회
-  const getCoordinates = async (mountainName) => {
-    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${mountainName}`;
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      if (data && data.length > 0) {
-        const { lat, lon } = data[0];
-        setLatitude(lat);
-        setLongitude(lon);
-      } else {
-        alert('해당 산의 좌표를 찾을 수 없습니다.');
+      const [searching, setSearching] = useState(false);
+      const [saving, setSaving] = useState(false);
+      const [message, setMessage] = useState('');
+
+      // 모달 초기화
+      useEffect(() => {
+            if (isOpen) {
+                  setName('');
+                  setLatitude('');
+                  setLongitude('');
+                  setMessage('');
+            }
+      }, [isOpen]);
+
+      // 산 이름으로 좌표 검색
+      useEffect(() => {
+
+            const mountainName = name.trim();
+
+            setLatitude('');
+            setLongitude('');
+            setMessage('');
+
+            if (!isOpen || mountainName.length < 2) {
+                  setSearching(false);
+                  return;
+            }
+
+            const controller = new AbortController();
+            const timer = setTimeout(async () => {
+                  setSearching(true);
+
+                  try {
+                        const response = await fetch(
+                              `${API_URL}/api/mountains/geocode?name=${encodeURIComponent(mountainName)}`,
+                              {
+                                    signal: controller.signal
+                              }
+                        );
+
+                        const result = await response.json();
+
+                        if (!response.ok) {
+                              throw new Error(
+                                    result.message || '좌표 검색 실패'
+                              );
+                        }
+                        setLatitude(result.latitude);
+                        setLongitude(result.longitude);
+                        setMessage('좌표 검색이 완료되었습니다.');
+
+                  } catch (error) {
+                        if (error.name !== 'AbortError') {
+                              setMessage(error.message);
+                              setLatitude('');
+                              setLongitude('');
+
+                        }
+
+                  } finally {
+                        if (!controller.signal.aborted) {
+                              setSearching(false);
+                        }
+
+                  }
+
+            }, 800);
+
+            return () => {
+                  clearTimeout(timer);
+                  controller.abort();
+            };
+
+      }, [name, isOpen]);
+
+      // 산행 등록
+      const handleSubmit = async (e) => {
+
+            e.preventDefault();
+
+            if (!latitude || !longitude) {
+                  alert('산 좌표를 먼저 확인해주세요.');
+                  return;
+            }
+            setSaving(true);
+
+            try {
+                  const newMountain = {
+                        name: name.trim(),
+                        latitude: Number(latitude),
+                        longitude: Number(longitude)
+                  };
+                  const response = await fetch(
+                        `${API_URL}/api/mountains`,
+                        {
+                              method: 'POST',
+                              headers: {
+                                    'Content-Type': 'application/json'
+                              },
+                              body: JSON.stringify(newMountain)
+                        }
+                  );
+                  const result = await response.json();
+                  if (!response.ok) {
+                        throw new Error(
+                              result.message || '산행 등록 실패'
+                        );
+                  }
+                  onMountainAdded(result);
+                  alert('산행 기록이 등록되었습니다.');
+                  onClose();
+
+            } catch (error) {
+                  alert(error.message);
+
+            } finally {
+                  setSaving(false);
+            }
+      };
+
+      if (!isOpen) {
+            return null;
       }
-    } catch (error) {
-      console.error('Error fetching coordinates:', error);
-    }
-  };
 
-  // 폼 제출 시
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+      return (
+            <div className="modal" onClick={onClose}>
+                  <div
+                        className="modalPopup"
+                        onClick={(e) => e.stopPropagation()}
+                  >
+                        <h3>산 추가하기</h3>
+                        <form onSubmit={handleSubmit}>
 
-    if (!latitude || !longitude) {
-      alert('좌표를 먼저 확인해주세요.');
-      return;
-    }
+                              <label>산 이름</label>
+                              <input
+                                    type="text"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    placeholder="산 이름"
+                                    required
+                              />
 
-    const newMountain = {
-      name,
-      latitude: parseFloat(latitude),
-      longitude: parseFloat(longitude),
-    };
+                              <label>위도</label>
+                              <input
+                                    type="text"
+                                    value={latitude}
+                                    readOnly
+                                    placeholder="위도"
+                              />
 
-    try {
-      // 서버로 POST 요청
-      const response = await fetch('http://localhost:8080/mountains', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newMountain),
-      });
+                              <label>경도</label>
+                              <input
+                                    type="text"
+                                    value={longitude}
+                                    readOnly
+                                    placeholder="경도"
+                              />
 
-      const result = await response.json();
-      onMountainAdded(result);  // 부모 컴포넌트에 새 산 정보 알림
-      onClose();  // 모달 닫기
-    } catch (error) {
-      console.error('Error adding mountain:', error);
-    }
-  };
+                              <p className="coordinateMessage">
+                                    {searching
+                                          ? '좌표 검색 중입니다...'
+                                          : message}
+                              </p>
 
-  // 산 이름 입력 시 좌표 조회
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-    if (e.target.value.length > 2) {
-      getCoordinates(e.target.value);
-    }
-  };
-
-  if (!isOpen) return null;
-
-  return (
-    <div className="modal" onClick={onClose}>
-      <div className="modalPopup" onClick={(e) => e.stopPropagation()}>
-        <h3>산 추가하기</h3>
-        <form onSubmit={handleSubmit}>
-          <label>산 이름</label>
-          <input
-            type="text"
-            value={name}
-            onChange={handleNameChange}
-            placeholder="산 이름"
-            required
-          />
-          <label>위도</label>
-          <input
-            type="text"
-            value={latitude}
-            readOnly
-            placeholder="위도"
-            required
-          />
-          <label>경도</label>
-          <input
-            type="text"
-            value={longitude}
-            readOnly
-            placeholder="경도"
-            required
-          />
-          <div className="btnWrap">
-            <button type="submit" className="btn sendBtn">산행 추가</button>
-            <button type="button" className="btn closeBtn" onClick={onClose}>닫기</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  );
+                              <div className="btnWrap">
+                                    <button
+                                          type="submit"
+                                          className="btn sendBtn"
+                                          disabled={
+                                                saving ||
+                                                searching ||
+                                                !latitude ||
+                                                !longitude
+                                          }
+                                    >
+                                          {saving ? '등록 중...' : '산행 추가'}
+                                    </button>
+                                    <button
+                                          type="button"
+                                          className="btn closeBtn"
+                                          onClick={onClose}
+                                          disabled={saving}
+                                    >
+                                          닫기
+                                    </button>
+                              </div>
+                        </form>
+                  </div>
+            </div>
+      );
 };
 
 export default Modal;
